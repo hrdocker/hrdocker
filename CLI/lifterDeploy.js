@@ -3,7 +3,7 @@ var prompt = require('../node_modules/prompt');
 var vmSetupQuestions = require('./vmSetup.js');
 
 
-//check if user has azure-cli installed - #81
+//check if user has azure-cli installed
 exports.checkAzure = function(){
   exec('npm list -g --depth=0 | grep azure-cli', function(err, stdout, stderr){
     if(/azure-cli/.test(stdout)) {
@@ -55,7 +55,7 @@ var setupAzureVM = function() {
 }
 
 
-//create an Azure VM with the Ubuntu image
+//create an Azure VM with ubuntu image
 var createAzureVM = function(img, creds) {
 
   var command = 'azure vm docker create -e 22 -l "West US" '+ creds[0] +' "' + img + '" ' + creds[1] + ' ' + creds[2];
@@ -69,8 +69,14 @@ var createAzureVM = function(img, creds) {
         console.log("ERR: ", err);
       }
     } else {
-      console.log("VM created");
+      console.log('Azure VM "'+ creds[0] + '" created');
+      console.log("Please complete the following steps:\n
+        1. ssh into your new vm: ssh " +creds[1]+ "@" +creds[0]+".cloudapp.net\n
+        2. you will be prompted for you vm password\n
+        ");
+
     }
   });
 }
+
 
