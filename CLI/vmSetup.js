@@ -13,7 +13,31 @@ exports.vmSetup = {
         hidden: true,
         required: true,
         pattern: /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=]).{8,20})/,
-        message: "Please make sure your password meets all requirements"
+        message: "Please make sure your password meets all requirements".red
       }
     }
   };
+
+  exports.existingOrNew = {
+    properties: {
+      select: {
+        description: "Are you deploying to an existing azure vm or creating a new one? (existing/new)".white,
+        pattern: /existing|new/,
+        message: "Please type in existing or new".red,
+        required: true
+      }
+    }
+  }
+
+  exports.vmInfo = {
+    properties: {
+      vmName: {
+        description: "What is your vm name?".white,
+        required: true
+      }, 
+      vmUsername: {
+        description: "What is your vm username?".white,
+        required: true
+      }
+    }
+  }
